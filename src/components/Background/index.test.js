@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { Background, updateBallPosition } from '.';
+import { Background, getBallPosition } from '.';
 import { expect } from '@jest/globals';
 
 test('should render background comp', () => {
@@ -14,8 +14,8 @@ test('should render 2 balls when given init amount', () => {
   expect(balls.length).toBe(2);
 });
 
-test('should update ball position', () => {
-  const { dx, dy } = updateBallPosition({
+test('should get ball position', () => {
+  const { dx, dy } = getBallPosition({
     x: 10, y: 10, dir: Math.PI / 2,
   }, 100);
   expect(dx).toBeLessThan(0.0001);

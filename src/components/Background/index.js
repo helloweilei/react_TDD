@@ -37,9 +37,12 @@ export const Background = (props) => {
 
   useEffect(() => {
     const { offsetWidth, offsetHeight } = containerRef.current;
+    if (props.paused) {
+      return;
+    }
     const timer = setInterval(() => {
       const updatedBalls = ballsRef.current.map((ball) => {
-        const { dx, dy } = getBallPosition(ball, 4);
+        const { dx, dy } = getBallPosition(ball, 8);
         const newBall = {
           ...ball,
           x: ball.x + dx,
@@ -49,10 +52,10 @@ export const Background = (props) => {
         return newBall;
       });
       setBalls(updatedBalls);
-    }, 20);
+    }, 40);
     return () => clearInterval(timer);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [props.paused]);
 
   return (
     <div ref={containerRef} className="background" data-testid="container">
